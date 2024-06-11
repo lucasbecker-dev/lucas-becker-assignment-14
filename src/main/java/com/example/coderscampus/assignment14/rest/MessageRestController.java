@@ -1,4 +1,4 @@
-package com.example.coderscampus.assignment14.web;
+package com.example.coderscampus.assignment14.rest;
 
 import com.example.coderscampus.assignment14.domain.Message;
 import com.example.coderscampus.assignment14.service.ChannelService;
@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class MessageController {
+public class MessageRestController {
     private final MessageService messageService;
     private final ChannelService channelService;
 
     @Autowired
-    public MessageController(MessageService messageService, ChannelService channelService) {
+    public MessageRestController(MessageService messageService, ChannelService channelService) {
         this.messageService = messageService;
         this.channelService = channelService;
     }

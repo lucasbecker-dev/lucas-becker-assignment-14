@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class WelcomeController {
+public class WelcomeWebController {
 
     private final UserService userService;
     private final ChannelService channelService;
 
     @Autowired
-    public WelcomeController(UserService userService, ChannelService channelService) {
+    public WelcomeWebController(UserService userService, ChannelService channelService) {
         this.userService = userService;
         this.channelService = channelService;
     }

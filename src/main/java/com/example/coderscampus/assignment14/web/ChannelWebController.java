@@ -11,13 +11,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/channels")
-public class ChannelController {
+public class ChannelWebController {
 
     private final ChannelService channelService;
     private final MessageService messageService;
 
     @Autowired
-    public ChannelController(ChannelService channelService, MessageService messageService) {
+    public ChannelWebController(ChannelService channelService, MessageService messageService) {
         this.channelService = channelService;
         this.messageService = messageService;
     }
