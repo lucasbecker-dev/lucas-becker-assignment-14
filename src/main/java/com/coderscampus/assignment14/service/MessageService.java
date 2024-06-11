@@ -12,14 +12,20 @@ import java.util.List;
 @Service
 public class MessageService {
     private final MessageRepository messageRepo;
+    private final ChannelService channelService;
 
     @Autowired
-    public MessageService(MessageRepository messageRepo) {
+    public MessageService(MessageRepository messageRepo, ChannelService channelService) {
         this.messageRepo = messageRepo;
+        this.channelService = channelService;
     }
 
     public List<Message> findByChannel(Channel channel) {
         return messageRepo.findByChannel(channel);
+    }
+
+    public List<Message> findByChannelId(Long channelId) {
+        return findByChannel(channelService.findById(channelId));
     }
 
     public Message save(Message message) {
