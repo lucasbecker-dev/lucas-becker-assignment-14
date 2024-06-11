@@ -27,6 +27,6 @@ public class MessageRestController {
 
     @GetMapping("/channels/{channelId}/messages")
     public List<Message> getMessages(@PathVariable Long channelId) {
-        return messageService.findByChannel(channelService.findById(channelId));
+        return messageService.findByChannelId(channelId);
     }
 }
