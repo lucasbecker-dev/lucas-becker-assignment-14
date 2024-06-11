@@ -10,7 +10,10 @@ function getAndDisplayChannels() {
             var channelList = document.getElementById('channelList');
             data.forEach(channel => {
                 var li = document.createElement('li');
-                li.textContent = channel.name;
+                var a = document.createElement('a');
+                a.textContent = channel.name;
+                a.href = "/channels/" + channel.id;
+                li.appendChild(a);
                 channelList.appendChild(li);
             });
         })
