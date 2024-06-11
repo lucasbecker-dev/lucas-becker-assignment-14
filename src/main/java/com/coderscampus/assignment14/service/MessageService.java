@@ -1,10 +1,11 @@
-package com.example.coderscampus.assignment14.service;
+package com.coderscampus.assignment14.service;
 
-import com.example.coderscampus.assignment14.domain.Channel;
-import com.example.coderscampus.assignment14.domain.Message;
-import com.example.coderscampus.assignment14.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.coderscampus.assignment14.domain.Channel;
+import com.coderscampus.assignment14.domain.Message;
+import com.coderscampus.assignment14.repository.MessageRepository;
 
 import java.util.List;
 

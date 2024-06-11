@@ -1,13 +1,14 @@
-package com.example.coderscampus.assignment14.web;
+package com.coderscampus.assignment14.web;
 
-import com.example.coderscampus.assignment14.domain.Channel;
-import com.example.coderscampus.assignment14.domain.Message;
-import com.example.coderscampus.assignment14.service.ChannelService;
-import com.example.coderscampus.assignment14.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.coderscampus.assignment14.domain.Channel;
+import com.coderscampus.assignment14.domain.Message;
+import com.coderscampus.assignment14.service.ChannelService;
+import com.coderscampus.assignment14.service.MessageService;
 
 @Controller
 @RequestMapping("/channels")
@@ -21,8 +22,6 @@ public class ChannelWebController {
         this.channelService = channelService;
         this.messageService = messageService;
     }
-
-
 
     @GetMapping("/{channelId}")
     public ModelAndView channel(@PathVariable Long channelId) {

@@ -1,14 +1,15 @@
-package com.example.coderscampus.assignment14.web;
+package com.coderscampus.assignment14.web;
 
-import com.example.coderscampus.assignment14.domain.User;
-import com.example.coderscampus.assignment14.service.ChannelService;
-import com.example.coderscampus.assignment14.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.coderscampus.assignment14.domain.User;
+import com.coderscampus.assignment14.service.ChannelService;
+import com.coderscampus.assignment14.service.UserService;
 
 @Controller
 public class WelcomeWebController {
@@ -37,4 +38,3 @@ public class WelcomeWebController {
         return "redirect:/channels";
     }
 }
-

@@ -1,4 +1,4 @@
-package com.example.coderscampus.assignment14.domain;
+package com.coderscampus.assignment14.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;

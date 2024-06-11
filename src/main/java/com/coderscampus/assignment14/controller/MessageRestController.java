@@ -1,10 +1,11 @@
-package com.example.coderscampus.assignment14.rest;
+package com.coderscampus.assignment14.controller;
 
-import com.example.coderscampus.assignment14.domain.Message;
-import com.example.coderscampus.assignment14.service.ChannelService;
-import com.example.coderscampus.assignment14.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import com.coderscampus.assignment14.domain.Message;
+import com.coderscampus.assignment14.service.ChannelService;
+import com.coderscampus.assignment14.service.MessageService;
 
 import java.util.List;
 
