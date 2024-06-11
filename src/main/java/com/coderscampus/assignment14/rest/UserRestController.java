@@ -1,4 +1,4 @@
-package com.coderscampus.assignment14.controller;
+package com.coderscampus.assignment14.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;

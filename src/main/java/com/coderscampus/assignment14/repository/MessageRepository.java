@@ -11,4 +11,6 @@ import java.util.List;
 @Repository
 public interface MessageRepository extends JpaRepository<Message, Long> {
     public List<Message> findByChannel(Channel channel);
+
+    public List<Message> findByChannel_Id(Long channelId);
 }

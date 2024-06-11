@@ -1,9 +1,13 @@
 function init() {
+    if (sessionStorage.getItem('user') == null) {
+        window.location.href = "/welcome";
+        return;
+    }
     const channelId = window.location.pathname.split('/')[2];
-    document.getElementById('channelName').textContent = channelId;
+    getChannelName(channelId);
     setInterval(() => {
         getAndDisplayMessages(channelId);
-    }, 500);
+    }, 1000);
 }
 
 function checkEnter(event) {
@@ -55,6 +59,25 @@ function createMessage(content) {
         .then(response => response.json())
         .then(data => {
             console.log('Message created successfully:', data);
+        })
+        .then(() => {
+            getAndDisplayMessages(channelId);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+}
+
+function getChannelName(channelId) {
+    fetch('/channels/' + channelId, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('channelName').textContent = data.name;
         })
         .catch((error) => {
             console.error('Error:', error);
