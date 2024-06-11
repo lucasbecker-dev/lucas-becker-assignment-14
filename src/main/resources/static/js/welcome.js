@@ -1,6 +1,5 @@
 function init() {
     checkUser();
-    createChannels(['General', 'Development', 'Off-topic']);
     getAndDisplayChannels();
 }
 
@@ -14,7 +13,7 @@ function getAndDisplayChannels() {
         .then(response => response.json())
         .then(data => {
             const channelList = document.getElementById('channelList');
-            console.log(channelList);
+            channelList.innerHTML = '';
             data.forEach(channel => {
                 const li = document.createElement('li');
                 const a = document.createElement('a');
@@ -32,45 +31,39 @@ function getAndDisplayChannels() {
 function checkUser() {
     const user = sessionStorage.getItem('user');
     if (!user) {
-        const name = prompt("Please enter your name");
-        if (name != null) {
-            sessionStorage.setItem('user', name);
-            const newUser = {
-                name: name
-            };
-            fetch('/user', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(newUser),
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('User created successfully: ', data);
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                })
-        }
+        createNewUser;
+    } else {
+        updateWelcomeMessage();
     }
 }
 
-function createChannels(channelNames) {
-    const newChannels = channelNames.map(name => ({ name: name }));
-    fetch('/channels', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newChannels),
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Channels created successfully:', data);
-            getAndDisplayChannels();
+function createNewUser() {
+    const name = prompt("Please enter your name");
+    if (name != null) {
+        sessionStorage.setItem('user', name);
+        const newUser = {
+            name: name
+        };
+        fetch('/user', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newUser),
         })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
+            .then(response => response.json())
+            .then(data => {
+                console.log('User created successfully: ', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            })
+    }
+    updateWelcomeMessage();
+}
+
+function updateWelcomeMessage() {
+    const user = sessionStorage.getItem('user');
+    const welcome = document.getElementById('welcome');
+    welcome.innerHTML = 'Welcome ' + user;
 }
