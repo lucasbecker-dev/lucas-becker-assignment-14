@@ -7,10 +7,10 @@ function getAndDisplayChannels() {
     })
         .then(response => response.json())
         .then(data => {
-            var channelList = document.getElementById('channelList');
+            const channelList = document.getElementById('channelList');
             data.forEach(channel => {
-                var li = document.createElement('li');
-                var a = document.createElement('a');
+                const li = document.createElement('li');
+                const a = document.createElement('a');
                 a.textContent = channel.name;
                 a.href = "/channels/" + channel.id;
                 li.appendChild(a);
@@ -23,12 +23,12 @@ function getAndDisplayChannels() {
 }
 
 function checkUser() {
-    var user = sessionStorage.getItem('user')
+    const user = sessionStorage.getItem('user')
     if (!user) {
-        var name = prompt("Please enter your name")
+        const name = prompt("Please enter your name")
         if (name != null) {
             sessionStorage.setItem('user', name)
-            var newUser = {
+            const newUser = {
                 name: name
             }
             fetch('/user', {
@@ -51,7 +51,7 @@ function checkUser() {
 }
 
 function createChannels(channelNames) {
-    var newChannels = channelNames.map(name => ({ name: name }));
+    const newChannels = channelNames.map(name => ({ name: name }));
     fetch('/channels', {
         method: 'POST',
         headers: {
