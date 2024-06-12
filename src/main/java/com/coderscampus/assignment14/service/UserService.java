@@ -1,13 +1,12 @@
 package com.coderscampus.assignment14.service;
 
-import java.util.List;
-
+import com.coderscampus.assignment14.domain.User;
+import com.coderscampus.assignment14.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
-import com.coderscampus.assignment14.domain.User;
-import com.coderscampus.assignment14.repository.UserRepository;
+import java.util.List;
 
 @Service
 public class UserService {

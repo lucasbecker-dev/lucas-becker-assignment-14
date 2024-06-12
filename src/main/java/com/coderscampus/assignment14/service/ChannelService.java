@@ -1,11 +1,10 @@
 package com.coderscampus.assignment14.service;
 
+import com.coderscampus.assignment14.domain.Channel;
+import com.coderscampus.assignment14.repository.ChannelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
-
-import com.coderscampus.assignment14.domain.Channel;
-import com.coderscampus.assignment14.repository.ChannelRepository;
 
 import java.util.List;
 

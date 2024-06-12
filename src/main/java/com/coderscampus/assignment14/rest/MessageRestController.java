@@ -1,12 +1,11 @@
 package com.coderscampus.assignment14.rest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import com.coderscampus.assignment14.domain.Message;
 import com.coderscampus.assignment14.service.ChannelService;
 import com.coderscampus.assignment14.service.MessageService;
 import com.coderscampus.assignment14.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -19,7 +18,7 @@ public class MessageRestController {
 
     @Autowired
     public MessageRestController(MessageService messageService, ChannelService channelService,
-            UserService userService) {
+                                 UserService userService) {
         this.messageService = messageService;
         this.channelService = channelService;
         this.userService = userService;
@@ -28,23 +27,17 @@ public class MessageRestController {
     @PostMapping("/message")
     public Message createMessage(@RequestBody Map<String, String> message) {
         System.out.println(message);
-        Message newMessage = null;
         try {
-            newMessage = Message
-                    .builder()
-                    .content(message.get("content"))
-                    .user(userService.findByName(message.get("userName")).get(0))
-                    .channel(channelService.findById(Long.parseLong(message.get("channelId"))))
-                    .build();
+            Message newMessage = new Message();
+            newMessage.setContent(message.get("content"));
+            newMessage.setUser(userService.findByName(message.get("userName")).get(0));
+            newMessage.setChannel(channelService.findById(Long.parseLong(message.get("channelId"))));
             return messageService.save(newMessage);
         } catch (NumberFormatException e) {
             System.err.println("Error: invalid channelId: " + message.get("channelId") + '\n' + e);
             return null;
-        } catch (ClassCastException e) {
-            System.err.println(e);
-            return null;
-        } catch (NullPointerException e) {
-            System.err.println(e);
+        } catch (ClassCastException | NullPointerException e) {
+            System.err.println("Error: " + e);
             return null;
         } catch (IndexOutOfBoundsException e) {
             System.err.println("Error: no existing User with name: " + message.get("userName") + '\n' + e);
