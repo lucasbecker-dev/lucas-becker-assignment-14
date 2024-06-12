@@ -1,6 +1,7 @@
 package com.coderscampus.assignment14.rest;
 
 import com.coderscampus.assignment14.domain.Message;
+import com.coderscampus.assignment14.domain.User;
 import com.coderscampus.assignment14.service.ChannelService;
 import com.coderscampus.assignment14.service.MessageService;
 import com.coderscampus.assignment14.service.UserService;
@@ -18,7 +19,7 @@ public class MessageRestController {
 
     @Autowired
     public MessageRestController(MessageService messageService, ChannelService channelService,
-                                 UserService userService) {
+            UserService userService) {
         this.messageService = messageService;
         this.channelService = channelService;
         this.userService = userService;
@@ -29,8 +30,17 @@ public class MessageRestController {
         System.out.println(message);
         try {
             Message newMessage = new Message();
+            User user = null;
+            List<User> users = userService.findByName(message.get("userName"));
+            if (users == null || users.isEmpty()) {
+                user = new User();
+                user.setName(message.get("userName"));
+                userService.save(user);
+            } else {
+                user = users.get(0);
+            }
             newMessage.setContent(message.get("content"));
-            newMessage.setUser(userService.findByName(message.get("userName")).get(0));
+            newMessage.setUser(user);
             newMessage.setChannel(channelService.findById(Long.parseLong(message.get("channelId"))));
             return messageService.save(newMessage);
         } catch (NumberFormatException e) {
