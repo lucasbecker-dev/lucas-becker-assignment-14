@@ -31,7 +31,7 @@ function getAndDisplayChannels() {
 function checkUser() {
     const user = sessionStorage.getItem('user');
     if (!user) {
-        createNewUser;
+        createNewUser();
     } else {
         updateWelcomeMessage();
     }
