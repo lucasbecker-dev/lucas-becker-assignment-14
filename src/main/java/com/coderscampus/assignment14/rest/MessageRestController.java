@@ -19,7 +19,7 @@ public class MessageRestController {
 
     @Autowired
     public MessageRestController(MessageService messageService, ChannelService channelService,
-            UserService userService) {
+                                 UserService userService) {
         this.messageService = messageService;
         this.channelService = channelService;
         this.userService = userService;
