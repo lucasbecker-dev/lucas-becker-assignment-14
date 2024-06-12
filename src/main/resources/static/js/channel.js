@@ -42,10 +42,10 @@ function getAndDisplayMessages(channelId) {
 
 function createMessage(content) {
     const channelId = window.location.pathname.split('/')[2];
-    const userId = sessionStorage.getItem('user');
+    const userName = sessionStorage.getItem('user');
     const newMessage = {
         content: content,
-        userId: userId,
+        userName: userName,
         channelId: channelId,
     };
 
