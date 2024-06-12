@@ -17,16 +17,8 @@ public class ChannelLoader {
 
     @PostConstruct
     private void loadData() {
-        Channel general = new Channel();
-        Channel development = new Channel();
-        Channel offTopic = new Channel();
-
-        general.setName("General");
-        development.setName("Development");
-        offTopic.setName("Off-Topic");
-
-        channelRepository.save(general);
-        channelRepository.save(development);
-        channelRepository.save(offTopic);
+        channelRepository.save(Channel.builder().name("General").build());
+        channelRepository.save(Channel.builder().name("Development").build());
+        channelRepository.save(Channel.builder().name("Off-Topic").build());
     }
 }
