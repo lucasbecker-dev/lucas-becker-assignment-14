@@ -1,13 +1,13 @@
 function init() {
     if (sessionStorage.getItem('user') == null) {
-        window.location.href = "/welcome";
-        return;
+        returnToWelcome();
     }
     const channelId = window.location.pathname.split('/')[2];
     getChannelName(channelId);
+    getAndDisplayMessages(channelId);
     setInterval(() => {
         getAndDisplayMessages(channelId);
-    }, 1000);
+    }, 5000);
 }
 
 function checkEnter(event) {
@@ -15,6 +15,7 @@ function checkEnter(event) {
         const messageInput = document.getElementById('messageInput');
         createMessage(messageInput.value);
         messageInput.value = '';
+        messageInput.setSelectionRange(0, 0);
     }
 }
 
@@ -30,9 +31,16 @@ function getAndDisplayMessages(channelId) {
             const messageList = document.getElementById('messageList');
             messageList.innerHTML = '';
             data.forEach(message => {
+                const span = document.createElement('span');
+                const strong = document.createElement('strong');
                 const p = document.createElement('p');
-                p.textContent = message.content;
-                messageList.appendChild(p);
+                const userName = document.createTextNode(message.user.name + ': ');
+                strong.appendChild(userName);
+                const messageContent = document.createTextNode(message.content);
+                p.appendChild(strong);
+                p.appendChild(messageContent);
+                span.appendChild(p);
+                messageList.appendChild(span);
             });
         })
         .catch((error) => {
@@ -78,8 +86,14 @@ function getChannelName(channelId) {
         .then(response => response.json())
         .then(data => {
             document.getElementById('channelName').textContent = data.name;
+            document.getElementById('currentUser').textContent = 'Current User: ' + sessionStorage.getItem('user');
         })
         .catch((error) => {
             console.error('Error:', error);
         });
+}
+
+function returnToWelcome() {
+    window.location.href = "/welcome";
+    return;
 }
