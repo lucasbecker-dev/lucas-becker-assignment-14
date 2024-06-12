@@ -1,6 +1,7 @@
 package com.coderscampus.assignment14.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
 import com.coderscampus.assignment14.domain.Channel;
@@ -12,12 +13,10 @@ import java.util.List;
 @Service
 public class MessageService {
     private final MessageRepository messageRepo;
-    private final ChannelService channelService;
 
     @Autowired
-    public MessageService(MessageRepository messageRepo, ChannelService channelService) {
+    public MessageService(MessageRepository messageRepo) {
         this.messageRepo = messageRepo;
-        this.channelService = channelService;
     }
 
     public List<Message> findByChannel(Channel channel) {
@@ -29,6 +28,14 @@ public class MessageService {
     }
 
     public Message save(Message message) {
-        return messageRepo.save(message);
+        try {
+            return messageRepo.save(message);
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error: message cannot be null\n" + e);
+            return null;
+        } catch (OptimisticLockingFailureException e) {
+            System.err.println(e);
+            return null;
+        }
     }
 }

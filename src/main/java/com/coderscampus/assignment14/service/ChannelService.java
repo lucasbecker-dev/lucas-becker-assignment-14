@@ -1,6 +1,7 @@
 package com.coderscampus.assignment14.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 
 import com.coderscampus.assignment14.domain.Channel;
@@ -22,10 +23,23 @@ public class ChannelService {
     }
 
     public Channel findById(Long channelId) {
-        return channelRepo.findById(channelId).orElse(null);
+        try {
+            return channelRepo.findById(channelId).orElse(null);
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error: channelId cannot be null\n" + e);
+            return null;
+        }
     }
 
     public Channel save(Channel channel) {
-        return channelRepo.save(channel);
+        try {
+            return channelRepo.save(channel);
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error: channel cannot be null\n" + e);
+            return null;
+        } catch (OptimisticLockingFailureException e) {
+            System.err.println(e);
+            return null;
+        }
     }
 }
